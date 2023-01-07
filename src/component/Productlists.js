@@ -20,33 +20,11 @@ import Item from "antd/es/list/Item";
 function Productlists() {
     const [prodlist, setProdlist] = useState([]);
     const [cardlist, setCardlist] = useState([]);
-
-
-    const [open, setOpen] = useState(false);
     let navigate = useNavigate()
-    const showModal = () => {
-        setOpen(true);
-    };
-    const handleOk = (e) => {
-        console.log(e);
-        setOpen(false);
-    };
-    const handleCancel = (e) => {
-        console.log(e);
-        setOpen(false);
-    };
-
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
-
     let dispatch = useDispatch()
     const { product_list } = useSelector((state) => state.data);
     const { card } = useSelector((state) => state.data);
-    console.log('addcardlists', card);
+  
 
 
 
@@ -60,14 +38,13 @@ function Productlists() {
         setProdlist(product_list)
 
         setCardlist(card)
-        console.log('cardvalue', card);
+      
 
 
     }, [card]);
 
 
-    console.log('prodlist', prodlist);
-
+   
 
     const Addcard_items = (values) => {
 
