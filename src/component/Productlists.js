@@ -15,6 +15,7 @@ import {
     MDBBtn,
     MDBRipple,
 } from "mdb-react-ui-kit";
+import Item from "antd/es/list/Item";
 
 function Productlists() {
     const [prodlist, setProdlist] = useState([]);
@@ -126,7 +127,7 @@ function Productlists() {
                                     <a className="text-reset">
 
 
-                                        {cardlist[index * 1]?.id != items.id ? <Button onClick={() => Addcard_items(items)}>AddCard</Button> : <Button onClick={() => Gotocard_items(items)}>Goto Card</Button>}
+                                        {cardlist[cardlist?.findIndex(Item=>Item.id === items.id)]?.id != items.id ? <Button onClick={() => Addcard_items(items)}>AddCard</Button> : <Button onClick={() => Gotocard_items(items)}>Goto Card</Button>}
 
 
 

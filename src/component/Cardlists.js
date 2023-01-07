@@ -300,9 +300,7 @@ function Cardlists() {
     const Remove_card = (values) => {
         const removeitem = cardlist.findIndex((e) => e.id === values.id);
         if (removeitem > -1) {
-            cardlist.splice(removeitem, 1);
-            
-          
+            cardlist.splice(removeitem, 1);       
 
         }
         console.log('cardlistdatas', cardlist);
