@@ -55,6 +55,15 @@ function Productlists() {
         setCardlist(card)
 
     }, [product_list]);
+    useEffect(() => {
+        setProdlist(product_list)
+
+        setCardlist(card)
+        console.log('cardvalue', card);
+
+
+    }, [card]);
+
 
     console.log('prodlist', prodlist);
 
@@ -63,15 +72,11 @@ function Productlists() {
 
         setCardlist([...cardlist, { 'id': values.id, 'img': values.img, 'status': true, 'type': values.type, 'prodname': values.prodname, 'price': values.price, 'quantity': 1 }])
 
-
-
     }
     const Gotocard_items = (values) => {
         dispatch({ type: 'Add_card', payload: cardlist })
         navigate('/cardlist')
     }
-
-    console.log('cardlistupdaate', cardlist);
 
     return (
         <div>
@@ -117,97 +122,7 @@ function Productlists() {
                                     <a href="#!" className="text-reset">
                                         <h5 className="card-title mb-3">{items.prodname}</h5>
                                     </a>
-                                    <Modal
-                                        title="Add Card"
-                                        open={open}
-                                        centered
-                                        footer='null'
-                                        onCancel={handleCancel}
-                                    >
 
-                                        <Form
-                                            name="basic"
-                                            labelCol={{
-                                                span: 8,
-                                            }}
-                                            wrapperCol={{
-                                                span: 16,
-                                            }}
-                                            initialValues={{
-                                                remember: true,
-                                            }}
-                                            onFinish={onFinish}
-                                            onFinishFailed={onFinishFailed}
-                                            autoComplete="off"
-                                        >
-                                            <Form.Item
-                                                label="Image_Url"
-                                                name="img"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                        message: 'Please input your img url!',
-                                                    },
-                                                ]}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                            <Form.Item
-                                                label="Type"
-                                                name="type"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                        message: 'Please input your type!',
-                                                    },
-                                                ]}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                            <Form.Item
-                                                label="Product_Name"
-                                                name="prodname"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                        message: 'Please input your productname!',
-                                                    },
-                                                ]}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                            <Form.Item
-                                                label="Price"
-                                                name="price"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                        message: 'Please input your price!',
-                                                    },
-                                                ]}
-                                            >
-                                                <Input value={items.price} />
-                                            </Form.Item>
-                                            <Form.Item
-                                                wrapperCol={{
-                                                    offset: 8,
-                                                    span: 16,
-                                                }}
-                                            >
-                                                <Space>
-                                                    <Button type="primary" htmlType="submit">
-                                                        Submit
-                                                    </Button>
-                                                    <Button onClick={handleCancel} danger={true}>
-                                                        Cancel
-                                                    </Button>
-                                                </Space>
-
-                                            </Form.Item>
-                                        </Form>
-
-
-                                    </Modal>
                                     <a className="text-reset">
 
 

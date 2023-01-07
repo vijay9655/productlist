@@ -75,11 +75,11 @@ const reducers = (state = initial, action) => {
             }
         case Edit_card:
             return {
-                state, card: action.payload
+                ...state, card: action.payload
             }
         case Delete_card:
             return {
-                state, card: action.payload,
+                ...state, card: action.payload,
             }
         default:
             return state;
