@@ -34,6 +34,12 @@ function Cardlists() {
 
     const onFinish = (values) => {
         console.log('Success:', values);
+        var edit = cardlist.findIndex((e) => e.id === values.id);
+        let arr = [...cardlist]
+        arr[edit].quantity = values.quantity;
+        setCardlist(arr)
+        dispatch({ type: 'Edit_card', payload: arr })
+
         setOpen(false);
     };
     const onFinishFailed = (errorInfo) => {
@@ -57,15 +63,15 @@ function Cardlists() {
 
 
 
-    const Edit_card = (values) => {
+    // const Edit_card = (values) => {
 
 
-        // setCardlist([...cardlist, { 'id': values.id, 'img': values.img, 'status': true, 'type': values.type, 'prodname': values.prodname, 'price': values.price, 'quantity': 1 }])
+    //     // setCardlist([...cardlist, { 'id': values.id, 'img': values.img, 'status': true, 'type': values.type, 'prodname': values.prodname, 'price': values.price, 'quantity': 1 }])
 
 
 
 
-    }
+    // }
     const Remove_card = (values) => {
         const removeitem = cardlist.findIndex((e) => e.id === values.id);
         if (removeitem > -1) {
@@ -82,12 +88,15 @@ function Cardlists() {
 
     console.log('cardlistupdaate', cardlist);
 
+
     return (
         <div>
-
+            <Button href="/" style={{ textAlign: 'start', position: 'absolute' }}><strong>&#8592;Product Lists</strong></Button>
             <MDBContainer fluid className="my-5 text-center">
+
+
                 <h4 className="mt-4 mb-5">
-                    <strong>Product List</strong>
+                    <strong>Card List</strong>
                 </h4>
 
                 <MDBRow>
@@ -110,7 +119,7 @@ function Cardlists() {
                                         <div className="mask">
                                             <div className="d-flex justify-content-start align-items-end h-100">
                                                 <h5>
-                                                    <span className="badge bg-primary ms-2">{items.type}</span>
+                                                    <span className="badge bg-primary ms-2">{items.quantity}</span>
                                                 </h5>
                                             </div>
                                         </div>
@@ -149,10 +158,11 @@ function Cardlists() {
                                             onFinishFailed={onFinishFailed}
                                             autoComplete="off"
                                         >
-                                            
+
                                             <Form.Item
-                                                label="Price"
-                                                name="quantity"
+                                                label="id"
+                                                name="id"
+
                                                 rules={[
                                                     {
                                                         required: true,
@@ -160,7 +170,20 @@ function Cardlists() {
                                                     },
                                                 ]}
                                             >
-                                                <Input value={items.price} />
+                                                <Input defaultValue={items.id} />
+                                            </Form.Item>
+                                            <Form.Item
+                                                label="quantity"
+                                                name="quantity"
+
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Please input your price!',
+                                                    },
+                                                ]}
+                                            >
+                                                <Input defaultValue={items.quantity} />
                                             </Form.Item>
                                             <Form.Item
                                                 wrapperCol={{

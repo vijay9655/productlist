@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Modal, Form, Input, Space } from 'antd'; 
+import { Button, Modal, Form, Input, Space } from 'antd';
 import { useNavigate } from "react-router-dom";
 import 'antd/dist/reset.css';
 import '../App.css'
@@ -19,10 +19,10 @@ import {
 function Productlists() {
     const [prodlist, setProdlist] = useState([]);
     const [cardlist, setCardlist] = useState([]);
-    const [remove, setRemove] = useState(false)
+
 
     const [open, setOpen] = useState(false);
-    let navigate=useNavigate()
+    let navigate = useNavigate()
     const showModal = () => {
         setOpen(true);
     };
@@ -52,9 +52,9 @@ function Productlists() {
 
     useEffect(() => {
         setProdlist(product_list)
+        setCardlist(card)
 
-
-    },);
+    }, [product_list]);
 
     console.log('prodlist', prodlist);
 
@@ -62,12 +62,12 @@ function Productlists() {
     const Addcard_items = (values) => {
 
         setCardlist([...cardlist, { 'id': values.id, 'img': values.img, 'status': true, 'type': values.type, 'prodname': values.prodname, 'price': values.price, 'quantity': 1 }])
-        
-        
+
+
 
     }
-    const Gotocard_items=(values)=>{
-    dispatch({ type: 'Add_card', payload: cardlist })
+    const Gotocard_items = (values) => {
+        dispatch({ type: 'Add_card', payload: cardlist })
         navigate('/cardlist')
     }
 

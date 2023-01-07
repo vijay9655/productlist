@@ -6,7 +6,7 @@ const Delete_card = 'Delete_card'
 const initial = {
     product_list: [
         {
-            id: 1,
+            id: '1',
             img: 'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/belt.webp',
             type: 'New',
             prodname: 'Belt',
@@ -14,7 +14,7 @@ const initial = {
 
         },
         {
-            id: 2,
+            id: '2',
             img: 'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(4).webp',
             type: 'New',
             prodname: 'Mens combo',
@@ -24,7 +24,7 @@ const initial = {
 
         },
         {
-            id: 3,
+            id: '3',
             img: 'https://pngimg.com/uploads/jeans/jeans_PNG5773.png',
             type: 'New',
             prodname: 'jeans',
@@ -33,7 +33,7 @@ const initial = {
 
         },
         {
-            id: 4,
+            id: '4',
             img: 'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(23).webp',
             type: 'New',
             prodname: 'Shoe & Jeans',
@@ -42,14 +42,14 @@ const initial = {
 
         },
         {
-            id: 5,
+            id: '5',
             img: 'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(17).webp',
             type: 'New',
             prodname: 'Womens collection',
             price: '200'
         },
         {
-            id: 6,
+            id: '6',
             img: 'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(30).webp',
             type: 'New',
             prodname: 'Combo Offer',
