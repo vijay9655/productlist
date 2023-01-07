@@ -246,17 +246,21 @@ function Cardlists() {
 
     const [cardlist, setCardlist] = useState([]);
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState({ visible: false });
+
     let navigate = useNavigate()
-    const showModal = () => {
-        setOpen(true);
+    const showModal = (record) => {
+        console.log(record)
+        setOpen({ visible: true, record });
     };
 
     const handleCancel = (e) => {
         console.log(e);
-        setOpen(false);
+        setOpen({ visible: false });
     };
 
+
+    console.log(cardlist,"=-=-=-=-=-=-=-=-cardlist=-=-=-=-=")
     const onFinish = (values) => {
 
 
@@ -273,7 +277,7 @@ function Cardlists() {
         setCardlist(arr)
         dispatch({ type: 'Edit_card', payload: arr })
 
-        setOpen(false);
+        setOpen({ visible: false });
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -297,7 +301,9 @@ function Cardlists() {
         const removeitem = cardlist.findIndex((e) => e.id === values.id);
         if (removeitem > -1) {
             cardlist.splice(removeitem, 1);
-            setCardlist(cardlist)
+            
+          
+
         }
         console.log('cardlistdatas', cardlist);
 
@@ -359,82 +365,10 @@ function Cardlists() {
                                     <a href="#!" className="text-reset">
                                         <h5 className="card-title mb-3">{items.prodname}</h5>
                                     </a>
-                                    <Modal
-                                        title="Add Card"
-                                        open={open}
-                                        centered
-                                        footer='null'
-                                        onCancel={handleCancel}
-                                    >
 
-                                        <Form
-                                            name="basic"
-                                            labelCol={{
-                                                span: 8,
-                                            }}
-                                            wrapperCol={{
-                                                span: 16,
-                                            }}
-                                            initialValues={{
-                                                remember: true,
-                                            }}
-                                            onFinish={onFinish}
-                                            onFinishFailed={onFinishFailed}
-                                            autoComplete="off"
-                                        >
-                                            <Form.Item
-                                                label="id"
-                                                name="id"
-                                                initialValue={items.id}
-
-                                            // rules={[
-                                            //     {
-                                            //         required: true,
-                                            //         message: 'Please input your price!',
-                                            //     },
-                                            // ]}
-                                            >
-                                                <Input disabled={true} defaultValue={items.id} />
-                                            </Form.Item>
-
-                                            {console.log('finalid', items.id)}
-
-                                            <Form.Item
-                                                label="quantity"
-                                                name="quantity"
-                                                initialValue={items.quantity}
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                        message: 'Please input your price!',
-                                                    },
-                                                ]}
-                                            >
-                                                <Input defaultValue={items.quantity} value={items.quantity} />
-                                            </Form.Item>
-                                            <Form.Item
-                                                wrapperCol={{
-                                                    offset: 8,
-                                                    span: 16,
-                                                }}
-                                            >
-                                                <Space>
-                                                    <Button type="primary" htmlType="submit">
-                                                        Submit
-                                                    </Button>
-                                                    <Button onClick={handleCancel} danger={true}>
-                                                        Cancel
-                                                    </Button>
-                                                </Space>
-
-                                            </Form.Item>
-                                        </Form>
-
-
-                                    </Modal>
                                     <a className="text-reset">
                                         <Space>
-                                            <Button onClick={showModal}>Edit Card</Button>
+                                            <Button onClick={() => { showModal(items) }}>Edit Card</Button>
                                             <Button onClick={() => Remove_card(items)}>Remove Card</Button>
                                         </Space>
 
@@ -452,7 +386,88 @@ function Cardlists() {
                     })}
 
                 </MDBRow>
-            </MDBContainer></div>
+            </MDBContainer>
+
+            {
+                open.visible && (
+                    <Modal
+                        title="Add Card"
+                        open={open.visible}
+                        centered
+                        footer='null'
+                        onCancel={handleCancel}
+                    >
+                        {
+                            (open.visible && open.record) && (
+                                <Form
+                                    name="basic"
+                                    labelCol={{
+                                        span: 8,
+                                    }}
+                                    wrapperCol={{
+                                        span: 16,
+                                    }}
+                                    initialValues={{
+                                        remember: true,
+                                        ...open.record
+                                    }}
+                                    onFinish={onFinish}
+                                    onFinishFailed={onFinishFailed}
+                                    autoComplete="off"
+                                >
+                                    <Form.Item
+                                        label="id"
+                                        name="id"
+                                        initialValue={open.record.id}
+
+                                    // rules={[
+                                    //     {
+                                    //         required: true,
+                                    //         message: 'Please input your price!',
+                                    //     },
+                                    // ]}
+                                    >
+                                        <Input disabled={true} defaultValue={open.record.id} />
+                                    </Form.Item>
+
+                                    <Form.Item
+                                        label="quantity"
+                                        name="quantity"
+                                        initialValue={open.record.quantity}
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please input your price!',
+                                            },
+                                        ]}
+                                    >
+                                        <Input defaultValue={open.record.quantity} value={open.record.quantity} />
+                                    </Form.Item>
+                                    <Form.Item
+                                        wrapperCol={{
+                                            offset: 8,
+                                            span: 16,
+                                        }}
+                                    >
+                                        <Space>
+                                            <Button type="primary" htmlType="submit">
+                                                Submit
+                                            </Button>
+                                            <Button onClick={handleCancel} danger={true}>
+                                                Cancel
+                                            </Button>
+                                        </Space>
+
+                                    </Form.Item>
+                                </Form>
+                            )
+                        }
+
+                    </Modal>
+                )
+            }
+
+        </div>
     );
 }
 
